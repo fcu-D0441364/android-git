@@ -11,22 +11,22 @@
             android:id="@+id/BTN_NewRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="45dp"
-            android:text="Button"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:text="建立新團" />
 
         <Button
             android:id="@+id/BTN_RoomList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
-            android:text="Button"
-            android:layout_below="@+id/BTN_NewRoom"
             android:layout_alignLeft="@+id/BTN_NewRoom"
-            android:layout_alignStart="@+id/BTN_NewRoom" />
+            android:layout_alignStart="@+id/BTN_NewRoom"
+            android:layout_below="@+id/BTN_NewRoom"
+            android:layout_marginTop="42dp"
+            android:text="團體清單" />
     </RelativeLayout>
 </LinearLayout>

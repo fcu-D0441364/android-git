@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button btn = (Button)findViewById(R.id.BTN_NewRoom);
         btn.setOnClickListener(newRoom);
         btn = (Button)findViewById(R.id.BTN_RoomList);
@@ -38,4 +39,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
 }

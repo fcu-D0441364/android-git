@@ -32,26 +32,27 @@ public class NewRoom extends AppCompatActivity {
         btn.setOnClickListener(create);
     }
 
-    private OnClickListener cancel = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            finish();
-        }
-    };
+        private OnClickListener cancel = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
 
-    private OnClickListener create = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String name = et_name.getText().toString();
-            String restaurant = et_restaurant.getText().toString();
-            String location = et_location.getText().toString();
-            Intent intent = new Intent();
+        private OnClickListener create = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = et_name.getText().toString();
+                String restaurant = et_restaurant.getText().toString();
+                String location = et_location.getText().toString();
+                Intent intent = new Intent();
 
-            intent.putExtra("KEY_NAME",name);
-            intent.putExtra("KEY_RESTAURANT",restaurant);
-            intent.putExtra("KEY_LOCATION",location);
-            intent.setClass(NewRoom.this,Room.class);
-            startActivity(intent);
-        }
-    };
+                intent.putExtra("KEY_NAME",name);
+                intent.putExtra("KEY_RESTAURANT",restaurant);
+                intent.putExtra("KEY_LOCATION",location);
+                intent.setClass(NewRoom.this,Room.class);
+                startActivity(intent);
+            }
+        };
+
 }
