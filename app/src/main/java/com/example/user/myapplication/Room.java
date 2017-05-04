@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Room extends AppCompatActivity {
 
@@ -32,7 +33,7 @@ public class Room extends AppCompatActivity {
         tv.setText("取餐地點 : "+temp);
     }
 
-    private OnClickListener orderList = new View.OnClickListener() {
+    private OnClickListener orderList = new OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
@@ -41,7 +42,7 @@ public class Room extends AppCompatActivity {
         }
     };
 
-    private OnClickListener order = new View.OnClickListener() {
+    private OnClickListener order = new OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();

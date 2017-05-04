@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Order extends AppCompatActivity {
 
@@ -20,13 +21,15 @@ public class Order extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
 
+        Toast.makeText(Order.this, "HELLO", Toast.LENGTH_LONG).show();
+
         et_order = (EditText)findViewById(R.id.ET_order);
         et_price = (EditText)findViewById(R.id.ET_price);
 
-        Button btn = (Button)findViewById(R.id.BTN_Order);
+        Button btn = (Button)findViewById(R.id.BTN_order);
         btn.setOnClickListener(submit);
-        btn = (Button)findViewById(R.id.BTN_Cancel);
-        btn.setOnClickListener(cancel);
+        Button btn2 = (Button)findViewById(R.id.BTN_Cancel);
+        btn2.setOnClickListener(cancel);
     }
 
     private OnClickListener cancel = new OnClickListener() {
@@ -43,10 +46,10 @@ public class Order extends AppCompatActivity {
             String price = et_price.getText().toString();
             Intent intent = new Intent();
 
+            intent.setClass(Order.this, Room.class);
             intent.putExtra("KEY_ORDER",order);
             intent.putExtra("KEY_PRICE",price);
             startActivity(intent);
-            finish();
         }
     };
 }
