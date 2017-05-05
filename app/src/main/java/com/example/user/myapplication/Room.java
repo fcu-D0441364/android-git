@@ -9,7 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.user.myapplication.Order.KEY_ORDER;
+import static com.example.user.myapplication.Order.KEY_PRICE;
+
 public class Room extends AppCompatActivity {
+    public static String FOOD_NAME = "FOOD";
+    public static String FOOD_PRICE = "PRICE";
+    private String ordername;
+    private String orderprice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +44,32 @@ public class Room extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
+            intent.putExtra(FOOD_NAME, ordername);
+            intent.putExtra(FOOD_PRICE, orderprice);
             intent.setClass(Room.this,OrderList.class);
             startActivity(intent);
         }
     };
+
+    private static final int submitnum = 1;
 
     private OnClickListener order = new OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
             intent.setClass(Room.this,Order.class);
-            startActivity(intent);
+            startActivityForResult(intent, submitnum);
         }
     };
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        switch(requestCode){
+            case submitnum :
+                ordername = intent.getStringExtra(KEY_ORDER);
+                orderprice = intent.getStringExtra(KEY_PRICE);
+        }
+    }
 }

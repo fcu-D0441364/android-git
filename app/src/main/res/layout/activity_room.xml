@@ -53,10 +53,12 @@
             android:id="@+id/BTN_Order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/BTN_OrderList"
-            android:layout_marginTop="45dp"
-            android:text="點餐" />
+            android:text="點餐"
+            android:layout_alignBaseline="@+id/BTN_OrderList"
+            android:layout_alignBottom="@+id/BTN_OrderList"
+            android:layout_toRightOf="@+id/BTN_OrderList"
+            android:layout_toEndOf="@+id/BTN_OrderList"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.user.myapplication.Room.FOOD_NAME;
+
 public class OrderList extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,13 +17,11 @@ public class OrderList extends AppCompatActivity {
         setContentView(R.layout.activity_order_list);
 
         TextView TV = (TextView)findViewById(R.id.TV);
-        Toast.makeText(OrderList.this, "HELLO", Toast.LENGTH_LONG).show();
 
-        String ori;
-        String temp;
-        ori =TV.getText().toString();
         Intent intent = getIntent();
-        temp = intent.getStringExtra("KEY_ORDER");
-        TV.setText(ori+temp);
+        String temp = intent.getStringExtra(FOOD_NAME);
+        TV.setText(TV.getText().toString()+temp);
+        String ori = TV.getText().toString();
+        Toast.makeText(OrderList.this, ori, Toast.LENGTH_LONG).show();
     }
 }

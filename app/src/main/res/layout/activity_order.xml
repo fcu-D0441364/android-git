@@ -28,8 +28,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView5"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="點餐" />
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/textView6"
@@ -48,18 +47,17 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView6"
             android:ems="10"
-            android:inputType="text"
-            android:text="輸入總價" />
+            android:inputType="text" />
 
         <Button
             android:id="@+id/BTN_Cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_marginTop="13dp"
+            android:text="取消"
             android:layout_below="@+id/ET_price"
-            android:layout_marginTop="128dp"
-            android:text="取消" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/BTN_order"
@@ -69,5 +67,15 @@
             android:layout_alignBottom="@+id/BTN_Cancel"
             android:layout_centerHorizontal="true"
             android:text="提交" />
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/BTN_Cancel"
+            android:layout_marginTop="18dp" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

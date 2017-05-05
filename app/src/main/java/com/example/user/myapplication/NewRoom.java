@@ -47,9 +47,9 @@ public class NewRoom extends AppCompatActivity {
                 String location = et_location.getText().toString();
                 Intent intent = new Intent();
 
-                intent.putExtra("KEY_NAME",name);
-                intent.putExtra("KEY_RESTAURANT",restaurant);
-                intent.putExtra("KEY_LOCATION",location);
+                intent.putExtra(KEY_NAME,name);
+                intent.putExtra(KEY_RESTAURANT, restaurant);
+                intent.putExtra(KEY_LOCATION, location);
                 intent.setClass(NewRoom.this,Room.class);
                 startActivity(intent);
             }
