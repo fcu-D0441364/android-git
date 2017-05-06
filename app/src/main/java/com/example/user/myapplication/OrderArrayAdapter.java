@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class StoreArrayAdapter extends ArrayAdapter<StoreMenu> {
+public class OrderArrayAdapter extends ArrayAdapter<MemberOrder>{
     Context context;
 
-    public StoreArrayAdapter(Context context, ArrayList<StoreMenu> items){
+    public OrderArrayAdapter(Context context, ArrayList<MemberOrder> items){
         super(context, 0, items);
         this.context = context;
     }
@@ -24,20 +24,21 @@ public class StoreArrayAdapter extends ArrayAdapter<StoreMenu> {
         LinearLayout itemlayout = null;
 
         if(convertView==null) {
-            itemlayout = (LinearLayout)inflater.inflate(R.layout.storelist, null);
+            itemlayout = (LinearLayout)inflater.inflate(R.layout.who_order, null);
         }
         else{
             itemlayout = (LinearLayout)convertView;
         }
 
-        StoreMenu store = (StoreMenu)getItem(position);
+        MemberOrder member = (MemberOrder)getItem(position);
 
-        ImageView p1 = (ImageView)itemlayout.findViewById(R.id.img1);
-        p1.setImageResource(store.pic);
-        TextView n1 = (TextView)itemlayout.findViewById(R.id.tv1);
-        n1.setText(store.store);
+        TextView v1 = (TextView)itemlayout.findViewById(R.id.who);
+        v1.setText("成員 : "+member.name);
+        TextView v2 = (TextView)itemlayout.findViewById(R.id.order);
+        v2.setText("訂購 : "+member.order);
+        TextView v3 = (TextView)itemlayout.findViewById(R.id.price);
+        v3.setText("價錢 : "+member.price);
 
         return itemlayout;
     }
-
 }

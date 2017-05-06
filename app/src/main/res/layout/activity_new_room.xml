@@ -71,15 +71,34 @@
             android:ems="10"
             android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/BTN_Cancel"
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/ET_Location"
-            android:layout_marginTop="57dp"
-            android:text="取消" />
+            android:text="到期時間" />
+
+        <EditText
+            android:id="@+id/ET_Deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView4"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/BTN_Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="61dp"
+            android:text="取消"
+            android:layout_below="@+id/ET_Deadline"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/BTN_Create"
@@ -90,6 +109,7 @@
             android:layout_alignEnd="@+id/ET_Location"
             android:layout_alignRight="@+id/ET_Location"
             android:text="建立" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -39,6 +39,15 @@
             android:layout_below="@+id/TV_RESTAURANT"
             android:layout_marginTop="51dp" />
 
+        <TextView
+            android:id="@+id/TV_DEADLINE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/TV_LOCATION"
+            android:layout_marginTop="42dp" />
+
         <Button
             android:id="@+id/BTN_OrderList"
             android:layout_width="wrap_content"
@@ -60,5 +69,6 @@
             android:layout_toEndOf="@+id/BTN_OrderList"
             android:layout_marginLeft="27dp"
             android:layout_marginStart="27dp" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

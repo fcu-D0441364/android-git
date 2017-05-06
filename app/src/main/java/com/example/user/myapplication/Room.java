@@ -9,14 +9,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.user.myapplication.NewRoom.KEY_DEADLINE;
+import static com.example.user.myapplication.NewRoom.KEY_LOCATION;
+import static com.example.user.myapplication.NewRoom.KEY_NAME;
+import static com.example.user.myapplication.NewRoom.KEY_RESTAURANT;
 import static com.example.user.myapplication.Order.KEY_ORDER;
 import static com.example.user.myapplication.Order.KEY_PRICE;
 
 public class Room extends AppCompatActivity {
     public static String FOOD_NAME = "FOOD";
     public static String FOOD_PRICE = "PRICE";
+    public static String USER_NAME = "NAME";
     private String ordername;
     private String orderprice;
+    public String NAME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +36,17 @@ public class Room extends AppCompatActivity {
         Intent intent = getIntent();
         String temp;
         TextView tv = (TextView)findViewById(R.id.TV_NAME);
-        temp = intent.getStringExtra("KEY_NAME");
-        tv.setText("主揪人姓名 : "+temp);
+        NAME = intent.getStringExtra(KEY_NAME);
+        tv.setText("主揪人姓名 : "+NAME);
         tv = (TextView)findViewById(R.id.TV_RESTAURANT);
-        temp = intent.getStringExtra("KEY_RESTAURANT");
+        temp = intent.getStringExtra(KEY_RESTAURANT);
         tv.setText("訂餐餐廳 : "+temp);
         tv = (TextView)findViewById(R.id.TV_LOCATION);
-        temp = intent.getStringExtra("KEY_LOCATION");
+        temp = intent.getStringExtra(KEY_LOCATION);
         tv.setText("取餐地點 : "+temp);
+        tv = (TextView)findViewById(R.id.TV_DEADLINE);
+        temp = intent.getStringExtra(KEY_DEADLINE);
+        tv.setText("截止時間 : "+temp);
     }
 
     private OnClickListener orderList = new OnClickListener() {
@@ -46,6 +55,7 @@ public class Room extends AppCompatActivity {
             Intent intent = new Intent();
             intent.putExtra(FOOD_NAME, ordername);
             intent.putExtra(FOOD_PRICE, orderprice);
+            intent.putExtra(USER_NAME, NAME);
             intent.setClass(Room.this,OrderList.class);
             startActivity(intent);
         }

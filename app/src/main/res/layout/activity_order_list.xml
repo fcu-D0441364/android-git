@@ -13,12 +13,30 @@
         tools:layout_editor_absoluteX="8dp">
 
         <TextView
-            android:id="@+id/TV"
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="總共 :" />
+
+        <ListView
+            android:id="@+id/LV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="18dp"
+            android:layout_below="@+id/textView12"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/TV_TOTAL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="14dp" />
+            android:layout_marginLeft="88dp"
+            android:layout_marginStart="50dp" />
+
     </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>
