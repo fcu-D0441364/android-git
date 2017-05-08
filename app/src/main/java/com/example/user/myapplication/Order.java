@@ -2,6 +2,7 @@ package com.example.user.myapplication;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class Order extends AppCompatActivity  {
 
     public static String KEY_ORDER = "KEY_ORDER";
     public static String KEY_PRICE = "KEY_PRICE";
+    SQLiteDatabase db;
     EditText et_order;
     EditText et_price;
     ListView lv ;
@@ -66,8 +68,8 @@ public class Order extends AppCompatActivity  {
         public void onClick(View v) {
             String order = et_order.getText().toString();
             String price = et_price.getText().toString();
-            Intent intent = new Intent();
 
+            Intent intent = new Intent();
             intent.setClass(Order.this, Room.class);
             intent.putExtra(KEY_ORDER,order);
             intent.putExtra(KEY_PRICE,price);

@@ -1,6 +1,9 @@
 package com.example.user.myapplication;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View.OnClickListener;
@@ -20,9 +23,10 @@ public class Room extends AppCompatActivity {
     public static String FOOD_NAME = "FOOD";
     public static String FOOD_PRICE = "PRICE";
     public static String USER_NAME = "NAME";
-    private String ordername;
-    private String orderprice;
+    private String ordername=null;
+    private String orderprice=null;
     public String NAME;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +57,8 @@ public class Room extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
-            intent.putExtra(FOOD_NAME, ordername);
-            intent.putExtra(FOOD_PRICE, orderprice);
-            intent.putExtra(USER_NAME, NAME);
+            if(ordername==null && orderprice==null) intent.putExtra("isExist", -1);
+            else intent.putExtra("isExist", 1);
             intent.setClass(Room.this,OrderList.class);
             startActivity(intent);
         }
@@ -73,13 +76,22 @@ public class Room extends AppCompatActivity {
     };
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
-
         super.onActivityResult(requestCode, resultCode, intent);
+
+        DBOpenHelper openhelper = new DBOpenHelper(this);
+        db = openhelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
 
         switch(requestCode){
             case submitnum :
                 ordername = intent.getStringExtra(KEY_ORDER);
                 orderprice = intent.getStringExtra(KEY_PRICE);
+                cv.put("title", NAME);
+                cv.put("body", ordername);
+                cv.put("price", orderprice);
+                db.insert(OrderDB.ORDERTABLE, null, cv);
+
         }
     }
+
 }

@@ -1,6 +1,8 @@
 package com.example.user.myapplication;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
@@ -15,33 +17,54 @@ import static com.example.user.myapplication.Room.FOOD_PRICE;
 import static com.example.user.myapplication.Room.USER_NAME;
 
 public class OrderList extends AppCompatActivity {
-
+    SQLiteDatabase db;
+    String totalprice;
+    int total=0;
+    ListView lv;
+    TextView tv;
+    int ex;
+    String user;
+    String food;
+    String price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
 
-        ListView lv = (ListView)findViewById(R.id.LV);
-        TextView tv = (TextView)findViewById(R.id.TV_TOTAL);
-        String totalprice;
-        int total=0;
+        lv = (ListView)findViewById(R.id.LV);
+        tv = (TextView)findViewById(R.id.TV_TOTAL);
 
         Intent intent = getIntent();
-        String food = intent.getStringExtra(FOOD_NAME);
-        String user = intent.getStringExtra(USER_NAME);
-        String price = intent.getStringExtra(FOOD_PRICE);
+        ex = intent.getIntExtra("isExist", -1);
+    }
 
-        if(food!=null && user!=null && price!=null) {
-            int i1 = Integer.parseInt(price);
-            total = total + i1;
-            totalprice = Integer.toString(total);
-            tv.setText(totalprice);
+    protected void onResume(){
+        super.onResume();
 
+        if(ex==1){
+            DBOpenHelper openhelper = new DBOpenHelper(this);
+            db = openhelper.getWritableDatabase();
+            Cursor c = db.rawQuery("select * from "+OrderDB.ORDERTABLE, null);
             ArrayList<MemberOrder> member = new ArrayList<MemberOrder>();
+            String [] names = c.getColumnNames();
 
-            member.add(new MemberOrder(user, food, price));
+            c.moveToFirst();
+            for(int i=0; i<c.getCount(); i++) {
+                user = c.getString(c.getColumnIndex("title"));
+                food = c.getString(c.getColumnIndex("body"));
+                price = c.getString(c.getColumnIndex("price"));
 
+                if(food!=null && user!=null && price!=null){
+                    int i1 = Integer.parseInt(price);
+                    total = total + i1;
+                    totalprice = Integer.toString(total);
+                    tv.setText(totalprice);
+
+                    member.add(new MemberOrder(user, food, price));
+                }
+                c.moveToNext();
+            }
             OrderArrayAdapter adapter = new OrderArrayAdapter(this, member);
             lv.setAdapter(adapter);
         }
