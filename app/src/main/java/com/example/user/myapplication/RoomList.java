@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class RoomList extends AppCompatActivity {
 
 
             if(name!=null && order!=null && location!=null && time!=null){
-                roomlist.add(new Roomitem("團主:"+name," 餐廳:"+order," 地點:"+location," 截止時間:"+time));
+                roomlist.add(new Roomitem(name,order,location,time));
             }
             c.moveToNext();
         }
@@ -72,6 +73,15 @@ public class RoomList extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> av, View v, int position, long id) {
+            TextView content = (TextView) v.findViewById(R.id.RoomName);
+            name = content.getText().toString();
+            content = (TextView) v.findViewById(R.id.order);
+            order = content.getText().toString();
+            content = (TextView) v.findViewById(R.id.location);
+            location = content.getText().toString();
+            content = (TextView) v.findViewById(R.id.deadline);
+            time = content.getText().toString();
+
             Intent intent = new Intent();
             intent.setClass(RoomList.this, Room.class);
             intent.putExtra(KEY_NAME, name);
