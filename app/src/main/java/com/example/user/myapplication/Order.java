@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.KeyEvent;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -62,6 +63,14 @@ public class Order extends AppCompatActivity  {
             finish();
         }
     };
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            Intent intent = new Intent();
+            setResult(RESULT_CANCELED, intent);
+            finish();
+        }
+        return true;
+    }
 
     private OnClickListener submit = new OnClickListener() {
         @Override

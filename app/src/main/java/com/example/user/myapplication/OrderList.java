@@ -20,6 +20,7 @@ public class OrderList extends AppCompatActivity {
     SQLiteDatabase db;
     String totalprice;
     int total=0;
+    int cont=0;
     ListView lv;
     TextView tv;
     int ex;
@@ -41,11 +42,12 @@ public class OrderList extends AppCompatActivity {
 
     protected void onResume(){
         super.onResume();
-
-        if(ex==1){
-            DBOpenHelper openhelper = new DBOpenHelper(this);
-            db = openhelper.getWritableDatabase();
-            Cursor c = db.rawQuery("select * from "+OrderDB.ORDERTABLE, null);
+        DBOpenHelper openhelper = new DBOpenHelper(this);
+        db = openhelper.getWritableDatabase();
+        Cursor c = db.rawQuery("select * from "+OrderDB.ORDERTABLE, null);
+        c.moveToFirst();
+        cont = c.getCount();
+        if(cont!=0){
             ArrayList<MemberOrder> member = new ArrayList<MemberOrder>();
             String [] names = c.getColumnNames();
 
@@ -68,5 +70,6 @@ public class OrderList extends AppCompatActivity {
             OrderArrayAdapter adapter = new OrderArrayAdapter(this, member);
             lv.setAdapter(adapter);
         }
+
     }
 }
