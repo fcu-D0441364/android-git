@@ -35,6 +35,8 @@ public class NewRoom extends AppCompatActivity {
         btn.setOnClickListener(cancel);
         btn = (Button)findViewById(R.id.BTN_Create);
         btn.setOnClickListener(create);
+
+
     }
 
         private OnClickListener cancel = new OnClickListener() {
@@ -59,6 +61,13 @@ public class NewRoom extends AppCompatActivity {
                 intent.putExtra(KEY_DEADLINE, deadline);
                 intent.setClass(NewRoom.this,Room.class);
                 startActivity(intent);
+
+                Intent room = new Intent();
+                room.putExtra(KEY_NAME,name);
+                room.putExtra(KEY_RESTAURANT, restaurant);
+                room.putExtra(KEY_LOCATION, location);
+                room.putExtra(KEY_DEADLINE, deadline);
+                room.setClass(NewRoom.this,RoomList.class);
             }
         };
 
