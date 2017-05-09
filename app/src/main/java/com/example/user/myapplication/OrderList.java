@@ -59,7 +59,7 @@ public class OrderList extends AppCompatActivity {
                     int i1 = Integer.parseInt(price);
                     total = total + i1;
                     totalprice = Integer.toString(total);
-                    tv.setText(totalprice);
+                    tv.setText(totalprice+" 元");
 
                     member.add(new MemberOrder(user, food, price));
                 }

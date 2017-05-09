@@ -1,6 +1,8 @@
 package com.example.user.myapplication;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewRoom extends AppCompatActivity {
 
@@ -20,6 +23,11 @@ public class NewRoom extends AppCompatActivity {
     EditText et_restaurant;
     EditText et_location;
     EditText et_deadline;
+    SQLiteDatabase db;
+    String name;
+    String restaurant;
+    String location;
+    String deadline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +57,10 @@ public class NewRoom extends AppCompatActivity {
         private OnClickListener create = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = et_name.getText().toString();
-                String restaurant = et_restaurant.getText().toString();
-                String location = et_location.getText().toString();
-                String deadline = et_deadline.getText().toString();
+                name = et_name.getText().toString();
+                restaurant = et_restaurant.getText().toString();
+                location = et_location.getText().toString();
+                deadline = et_deadline.getText().toString();
                 Intent intent = new Intent();
 
                 intent.putExtra(KEY_NAME,name);
@@ -60,15 +68,22 @@ public class NewRoom extends AppCompatActivity {
                 intent.putExtra(KEY_LOCATION, location);
                 intent.putExtra(KEY_DEADLINE, deadline);
                 intent.setClass(NewRoom.this,Room.class);
-                startActivity(intent);
 
-                Intent room = new Intent();
-                room.putExtra(KEY_NAME,name);
-                room.putExtra(KEY_RESTAURANT, restaurant);
-                room.putExtra(KEY_LOCATION, location);
-                room.putExtra(KEY_DEADLINE, deadline);
-                room.setClass(NewRoom.this,RoomList.class);
+                RoomOP openhelper = new RoomOP(NewRoom.this);
+                db = openhelper.getWritableDatabase();
+                ContentValues cv = new ContentValues();
+                cv.put("title", name);
+                cv.put("body", restaurant);
+                cv.put("price", location);
+                cv.put("deadline", deadline);
+                db.insert(OrderDB.ROOMTABLE, null, cv);
+
+
+                startActivity(intent);
             }
         };
+
+
+
 
 }

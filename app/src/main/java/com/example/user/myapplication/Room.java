@@ -94,4 +94,25 @@ public class Room extends AppCompatActivity {
         }
     }
 
+    /*protected void onResume(){
+        super.onResume();
+
+        Intent intent = getIntent();
+        if(intent!=null){
+            String temp;
+            TextView tv = (TextView)findViewById(R.id.TV_NAME);
+            NAME = intent.getStringExtra(RoomList.R_NAME);
+            tv.setText("主揪人姓名 : "+NAME);
+            tv = (TextView)findViewById(R.id.TV_RESTAURANT);
+            temp = intent.getStringExtra(RoomList.R_STORE);
+            tv.setText("訂餐餐廳 : "+temp);
+            tv = (TextView)findViewById(R.id.TV_LOCATION);
+            temp = intent.getStringExtra(RoomList.R_LOCATION);
+            tv.setText("取餐地點 : "+temp);
+            tv = (TextView)findViewById(R.id.TV_DEADLINE);
+            temp = intent.getStringExtra(RoomList.R_DEADLINE);
+            tv.setText("截止時間 : "+temp);
+        }
+    }*/
+
 }

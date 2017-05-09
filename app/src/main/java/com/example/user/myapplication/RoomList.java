@@ -1,11 +1,15 @@
 package com.example.user.myapplication;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,38 +20,64 @@ import static com.example.user.myapplication.NewRoom.KEY_NAME;
 import static com.example.user.myapplication.NewRoom.KEY_RESTAURANT;
 
 public class RoomList extends AppCompatActivity {
-
+    public static String R_NAME = "rn";
+    public static String R_STORE = "rs";
+    public static String R_LOCATION = "rl";
+    public static String R_DEADLINE = "rd";
     ListView lv;
-
+    String name;
+    String order;
+    String location;
+    String time;
+    SQLiteDatabase db;
+    ArrayList<Roomitem> roomlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
 
-        Intent room = getIntent();
-
-        String name = room.getStringExtra(KEY_NAME);
-        String order = room.getStringExtra(KEY_RESTAURANT);
-        String location = room.getStringExtra(KEY_LOCATION);
-        String time = room.getStringExtra(KEY_DEADLINE);
-
-        ArrayList<Roomitem> roomlist = new ArrayList<Roomitem>();
-        roomlist.add(new Roomitem("團主:"+name,"餐廳:"+order,"地點:"+location,"截止時間:"+time));
-
-        RoomAdapter adapter =new RoomAdapter(this, roomlist);
         lv = (ListView)findViewById(R.id.roomlist);
+
+    }
+
+    protected void onResume(){
+        super.onResume();
+
+        roomlist = new ArrayList<Roomitem>();
+
+        RoomOP openhelper = new RoomOP(this);
+        db = openhelper.getWritableDatabase();
+        Cursor c = db.rawQuery("select * from "+OrderDB.ROOMTABLE, null);
+
+        c.moveToFirst();
+        for(int i=0; i<c.getCount(); i++) {
+            name = c.getString(c.getColumnIndex("title"));
+            order = c.getString(c.getColumnIndex("body"));
+            location = c.getString(c.getColumnIndex("price"));
+            time = c.getString(c.getColumnIndex("deadline"));
+
+
+            if(name!=null && order!=null && location!=null && time!=null){
+                roomlist.add(new Roomitem("團主:"+name," 餐廳:"+order," 地點:"+location," 截止時間:"+time));
+            }
+            c.moveToNext();
+        }
+        RoomAdapter adapter =new RoomAdapter(this, roomlist);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(iclick);
 
     }
-    AdapterView.OnItemClickListener iclick = new AdapterView.OnItemClickListener() {
+    OnItemClickListener iclick = new OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> av, View v, int position, long id) {
             Intent intent = new Intent();
             intent.setClass(RoomList.this, Room.class);
-            intent.putExtra("NOTEPOS", position);
+            intent.putExtra(KEY_NAME, name);
+            intent.putExtra(KEY_RESTAURANT, order);
+            intent.putExtra(KEY_LOCATION, location);
+            intent.putExtra(KEY_DEADLINE, time);
             startActivity(intent);
         }
     };
