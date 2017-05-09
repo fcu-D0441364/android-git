@@ -91,5 +91,4 @@ public class RoomList extends AppCompatActivity {
             startActivity(intent);
         }
     };
-
 }
