@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "55938505433",
+    "firebase_url": "https://borderman-2ec22.firebaseio.com",
+    "project_id": "borderman-2ec22",
+    "storage_bucket": "borderman-2ec22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55938505433:android:9b537403cc3f9ff9",
+        "android_client_info": {
+          "package_name": "com.example.user.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "55938505433-t72t8b694nkekqsm758r64j7te9ho3ai.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.myapplication",
+            "certificate_hash": "dca32da1839b4ea360b14a57a47a3ba1d1cb9264"
+          }
+        },
+        {
+          "client_id": "55938505433-p6dv4r7gc3k5oha6hvqrk8843gpu9fgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYiglcZ91AN9yeHR1YQNSglpadHXFh-CA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55938505433-p6dv4r7gc3k5oha6hvqrk8843gpu9fgc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

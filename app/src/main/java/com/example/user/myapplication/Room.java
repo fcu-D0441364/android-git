@@ -12,10 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import static com.example.user.myapplication.NewRoom.KEY_DEADLINE;
 import static com.example.user.myapplication.NewRoom.KEY_LOCATION;
 import static com.example.user.myapplication.NewRoom.KEY_NAME;
 import static com.example.user.myapplication.NewRoom.KEY_RESTAURANT;
+import static com.example.user.myapplication.Order.KEY_NAMEO;
 import static com.example.user.myapplication.Order.KEY_ORDER;
 import static com.example.user.myapplication.Order.KEY_PRICE;
 
@@ -25,8 +29,10 @@ public class Room extends AppCompatActivity {
     public static String USER_NAME = "NAME";
     private String ordername=null;
     private String orderprice=null;
+    private String orderssname=null;
     public String NAME;
     SQLiteDatabase db;
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,7 @@ public class Room extends AppCompatActivity {
         tv = (TextView)findViewById(R.id.TV_DEADLINE);
         temp = intent.getStringExtra(KEY_DEADLINE);
         tv.setText("截止時間 : "+temp);
+        myRef = FirebaseDatabase.getInstance().getReference();
     }
 
     private OnClickListener orderList = new OnClickListener() {
@@ -86,6 +93,11 @@ public class Room extends AppCompatActivity {
             case submitnum :
                 ordername = intent.getStringExtra(KEY_ORDER);
                 orderprice = intent.getStringExtra(KEY_PRICE);
+                orderssname = intent.getStringExtra(KEY_NAMEO);
+                OrderInfo OI = new OrderInfo(orderssname, ordername, orderprice);
+                myRef.child("Room").child(NAME).child(orderssname).setValue(OI);
+
+
                 cv.put("title", NAME);
                 cv.put("body", ordername);
                 cv.put("price", orderprice);

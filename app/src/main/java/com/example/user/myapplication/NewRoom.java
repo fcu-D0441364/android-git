@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class NewRoom extends AppCompatActivity {
 
     public static String KEY_NAME = "KEY_NAME";
@@ -19,6 +22,7 @@ public class NewRoom extends AppCompatActivity {
     public static String KEY_LOCATION = "KEY_LOCATION";
     public static String KEY_DEADLINE = "KEY_DEADLINE";
 
+    private DatabaseReference myRef;
     EditText et_name;
     EditText et_restaurant;
     EditText et_location;
@@ -43,7 +47,7 @@ public class NewRoom extends AppCompatActivity {
         btn.setOnClickListener(cancel);
         btn = (Button)findViewById(R.id.BTN_Create);
         btn.setOnClickListener(create);
-
+        myRef = FirebaseDatabase.getInstance().getReference();
 
     }
 
@@ -68,6 +72,10 @@ public class NewRoom extends AppCompatActivity {
                 intent.putExtra(KEY_LOCATION, location);
                 intent.putExtra(KEY_DEADLINE, deadline);
                 intent.setClass(NewRoom.this,Room.class);
+
+                RoomInfo roominfo = new RoomInfo(name, restaurant, location, deadline);
+
+                myRef.child("Room").child(name).setValue(roominfo);
 
                 RoomOP openhelper = new RoomOP(NewRoom.this);
                 db = openhelper.getWritableDatabase();

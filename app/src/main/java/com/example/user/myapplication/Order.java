@@ -1,6 +1,5 @@
 package com.example.user.myapplication;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -14,7 +13,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,9 +20,11 @@ public class Order extends AppCompatActivity  {
 
     public static String KEY_ORDER = "KEY_ORDER";
     public static String KEY_PRICE = "KEY_PRICE";
+    public static String KEY_NAMEO = "KEY_NAMEO";
     SQLiteDatabase db;
     EditText et_order;
     EditText et_price;
+    EditText et_name;
     ListView lv ;
 
     @Override
@@ -34,6 +34,7 @@ public class Order extends AppCompatActivity  {
 
         et_order = (EditText)findViewById(R.id.ET_order);
         et_price = (EditText)findViewById(R.id.ET_price);
+        et_name = (EditText)findViewById(R.id.ET_nameaa);
 
         Button btn = (Button)findViewById(R.id.BTN_order);
         btn.setOnClickListener(submit);
@@ -77,11 +78,13 @@ public class Order extends AppCompatActivity  {
         public void onClick(View v) {
             String order = et_order.getText().toString();
             String price = et_price.getText().toString();
+            String name = et_name.getText().toString();
 
             Intent intent = new Intent();
             intent.setClass(Order.this, Room.class);
             intent.putExtra(KEY_ORDER,order);
             intent.putExtra(KEY_PRICE,price);
+            intent.putExtra(KEY_NAMEO, name);
             setResult(RESULT_OK, intent);
             finish();
         }

@@ -11,13 +11,10 @@
             android:id="@+id/BTN_NewRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_marginTop="40dp"
+            android:text="建立新團"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="45dp"
-            android:text="建立新團" />
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/BTN_RoomList"
