@@ -70,5 +70,16 @@
             android:layout_marginLeft="27dp"
             android:layout_marginStart="27dp" />
 
+        <Button
+            android:id="@+id/BACKHOME"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/BTN_Order"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_toEndOf="@+id/BTN_Order"
+            android:layout_toRightOf="@+id/BTN_Order"
+            android:text="回首頁" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

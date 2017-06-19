@@ -37,9 +37,9 @@ public class RoomList extends AppCompatActivity {
     String location;
     String time;
     SQLiteDatabase db;
-    ArrayList<Roomitem> roomlist = new ArrayList<Roomitem>();
-    DatabaseReference data;
-    DatabaseReference MyRef;
+    ArrayList<Roomitem> roomList = new ArrayList<Roomitem>();
+    DatabaseReference Rdata;
+    DatabaseReference RoRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +47,15 @@ public class RoomList extends AppCompatActivity {
         setContentView(R.layout.activity_room_list);
 
         lv = (ListView)findViewById(R.id.roomlist);
-        data = FirebaseDatabase.getInstance().getReference();
-        MyRef = data.child("Room");
+        Rdata = FirebaseDatabase.getInstance().getReference("Room");
+        RoRef = Rdata;
 
     }
 
     protected void onResume(){
         super.onResume();
-        MyRef = data.child("Room");
-        MyRef.addValueEventListener(new ValueEventListener() {
+        RoRef = Rdata;
+        RoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
@@ -68,7 +68,9 @@ public class RoomList extends AppCompatActivity {
                     location = (String)whereTake.getValue();
                     time = (String)whenDead.getValue();
 
-                    roomlist.add(new Roomitem(name, order, location, time));
+                    roomList.add(new Roomitem(name, order, location, time));
+
+
                 }
             }
 
@@ -78,7 +80,7 @@ public class RoomList extends AppCompatActivity {
             }
         });
 
-        RoomAdapter adapter =new RoomAdapter(this, roomlist);
+        RoomAdapter adapter =new RoomAdapter(this, roomList);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(iclick);
 

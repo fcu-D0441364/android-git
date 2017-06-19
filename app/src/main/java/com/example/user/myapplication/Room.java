@@ -44,6 +44,8 @@ public class Room extends AppCompatActivity {
         btn.setOnClickListener(orderList);
         btn = (Button)findViewById(R.id.BTN_Order);
         btn.setOnClickListener(order);
+        btn = (Button)findViewById(R.id.BACKHOME);
+        btn.setOnClickListener(BACK);
         Intent intent = getIntent();
         String temp;
         TextView tv = (TextView)findViewById(R.id.TV_NAME);
@@ -69,6 +71,14 @@ public class Room extends AppCompatActivity {
             else intent.putExtra("isExist", 1);
             intent.putExtra(ROOM_OWNER, NAME);
             intent.setClass(Room.this,OrderList.class);
+            startActivity(intent);
+        }
+    };
+    private OnClickListener BACK = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(Room.this, MainActivity.class);
             startActivity(intent);
         }
     };

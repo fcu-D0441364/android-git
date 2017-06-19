@@ -66,7 +66,7 @@ public class OrderList extends AppCompatActivity {
 
     protected void onResume(){
         super.onResume();
-        MyRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        /*MyRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child("OrderList").exists()){
@@ -81,7 +81,7 @@ public class OrderList extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
         //if(DataEX==true){
             MyRef = data.child("Room").child(owner).child("OrderList");
