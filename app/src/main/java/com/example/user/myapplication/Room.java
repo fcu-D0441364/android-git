@@ -27,6 +27,7 @@ public class Room extends AppCompatActivity {
     public static String FOOD_NAME = "FOOD";
     public static String FOOD_PRICE = "PRICE";
     public static String USER_NAME = "NAME";
+    public static String ROOM_OWNER = "ROOM";
     private String ordername=null;
     private String orderprice=null;
     private String orderssname=null;
@@ -66,6 +67,7 @@ public class Room extends AppCompatActivity {
             Intent intent = new Intent();
             if(ordername==null && orderprice==null) intent.putExtra("isExist", -1);
             else intent.putExtra("isExist", 1);
+            intent.putExtra(ROOM_OWNER, NAME);
             intent.setClass(Room.this,OrderList.class);
             startActivity(intent);
         }
@@ -85,6 +87,7 @@ public class Room extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
 
+        //myRef = FirebaseDatabase.getInstance().getReference();
         DBOpenHelper openhelper = new DBOpenHelper(this);
         db = openhelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -94,15 +97,10 @@ public class Room extends AppCompatActivity {
                 ordername = intent.getStringExtra(KEY_ORDER);
                 orderprice = intent.getStringExtra(KEY_PRICE);
                 orderssname = intent.getStringExtra(KEY_NAMEO);
-                OrderInfo OI = new OrderInfo(orderssname, ordername, orderprice);
-                myRef.child("Room").child(NAME).child(orderssname).setValue(OI);
-
-
-                cv.put("title", NAME);
-                cv.put("body", ordername);
-                cv.put("price", orderprice);
-                db.insert(OrderDB.ORDERTABLE, null, cv);
-
+                if(ordername!=null && orderprice!=null && orderssname!=null) {
+                    OrderInfo OI = new OrderInfo(orderssname, ordername, orderprice);
+                    myRef.child("Room").child(NAME).child("OrderList").child(orderssname).setValue(OI);
+                }
         }
     }
 

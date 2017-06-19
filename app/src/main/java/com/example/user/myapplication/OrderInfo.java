@@ -14,15 +14,4 @@ public class OrderInfo {
         this.Order = or;
         this.Price = pr;
     }
-    public String getName() {
-        return Name;
-    }
-
-    public String getOrder() {
-        return Order;
-    }
-
-    public String getPrice() {
-        return Price;
-    }
 }
