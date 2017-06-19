@@ -83,7 +83,7 @@ public class OrderList extends AppCompatActivity {
             }
         });
 
-        if(DataEX==true){
+        //if(DataEX==true){
             MyRef = data.child("Room").child(owner).child("OrderList");
 
 
@@ -114,7 +114,7 @@ public class OrderList extends AppCompatActivity {
 
             OrderArrayAdapter adapter = new OrderArrayAdapter(this, member);
             lv.setAdapter(adapter);
-        }
+        //}
 
     }
     private void getOrder(){

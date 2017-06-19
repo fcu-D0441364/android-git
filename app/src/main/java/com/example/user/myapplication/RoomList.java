@@ -12,6 +12,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 
@@ -31,7 +37,9 @@ public class RoomList extends AppCompatActivity {
     String location;
     String time;
     SQLiteDatabase db;
-    ArrayList<Roomitem> roomlist;
+    ArrayList<Roomitem> roomlist = new ArrayList<Roomitem>();
+    DatabaseReference data;
+    DatabaseReference MyRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,31 +47,37 @@ public class RoomList extends AppCompatActivity {
         setContentView(R.layout.activity_room_list);
 
         lv = (ListView)findViewById(R.id.roomlist);
+        data = FirebaseDatabase.getInstance().getReference();
+        MyRef = data.child("Room");
 
     }
 
     protected void onResume(){
         super.onResume();
+        MyRef = data.child("Room");
+        MyRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    DataSnapshot whoCreate = ds.child("Creator");
+                    DataSnapshot whereBuy = ds.child("Restaurant");
+                    DataSnapshot whereTake = ds.child("Location");
+                    DataSnapshot whenDead = ds.child("Deadline");
+                    name = (String)whoCreate.getValue();
+                    order = (String)whereBuy.getValue();
+                    location = (String)whereTake.getValue();
+                    time = (String)whenDead.getValue();
 
-        roomlist = new ArrayList<Roomitem>();
-
-        RoomOP openhelper = new RoomOP(this);
-        db = openhelper.getWritableDatabase();
-        Cursor c = db.rawQuery("select * from "+OrderDB.ROOMTABLE, null);
-
-        c.moveToFirst();
-        for(int i=0; i<c.getCount(); i++) {
-            name = c.getString(c.getColumnIndex("title"));
-            order = c.getString(c.getColumnIndex("body"));
-            location = c.getString(c.getColumnIndex("price"));
-            time = c.getString(c.getColumnIndex("deadline"));
-
-
-            if(name!=null && order!=null && location!=null && time!=null){
-                roomlist.add(new Roomitem(name,order,location,time));
+                    roomlist.add(new Roomitem(name, order, location, time));
+                }
             }
-            c.moveToNext();
-        }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         RoomAdapter adapter =new RoomAdapter(this, roomlist);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(iclick);
