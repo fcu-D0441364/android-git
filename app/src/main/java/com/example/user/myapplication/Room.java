@@ -98,9 +98,9 @@ public class Room extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
 
         //myRef = FirebaseDatabase.getInstance().getReference();
-        DBOpenHelper openhelper = new DBOpenHelper(this);
+        /*DBOpenHelper openhelper = new DBOpenHelper(this);
         db = openhelper.getWritableDatabase();
-        ContentValues cv = new ContentValues();
+        ContentValues cv = new ContentValues();*/
 
         switch(requestCode){
             case submitnum :

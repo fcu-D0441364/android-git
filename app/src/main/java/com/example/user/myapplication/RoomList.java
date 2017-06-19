@@ -3,10 +3,13 @@ package com.example.user.myapplication;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 import static com.example.user.myapplication.NewRoom.KEY_DEADLINE;
@@ -40,6 +44,8 @@ public class RoomList extends AppCompatActivity {
     ArrayList<Roomitem> roomList = new ArrayList<Roomitem>();
     DatabaseReference Rdata;
     DatabaseReference RoRef;
+    private static final int LIST_FKU = 1;
+    RoomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,23 @@ public class RoomList extends AppCompatActivity {
         lv = (ListView)findViewById(R.id.roomlist);
         Rdata = FirebaseDatabase.getInstance().getReference("Room");
         RoRef = Rdata;
+    }
 
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case LIST_FKU: {
+                    ArrayList<Roomitem> pets = (ArrayList<Roomitem>)msg.obj;
+                    refreshRoomList(pets);
+                    break;
+                }
+            }
+        }
+    };
+
+    private void refreshRoomList(ArrayList<Roomitem> pets) {
+        adapter.clear();
+        adapter.addAll(pets);
     }
 
     protected void onResume(){
@@ -80,9 +102,15 @@ public class RoomList extends AppCompatActivity {
             }
         });
 
-        RoomAdapter adapter =new RoomAdapter(this, roomList);
+        adapter =new RoomAdapter(this, roomList);
+
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(iclick);
+
+        Message msg = new Message();
+        msg.what = LIST_FKU;
+        msg.obj = roomList;
+        handler.sendMessage(msg);
 
     }
     OnItemClickListener iclick = new OnItemClickListener() {
@@ -107,4 +135,6 @@ public class RoomList extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
+
 }

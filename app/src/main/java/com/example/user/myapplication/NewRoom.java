@@ -77,14 +77,14 @@ public class NewRoom extends AppCompatActivity {
 
                 myRef.child("Room").child(name).setValue(roominfo);
 
-                RoomOP openhelper = new RoomOP(NewRoom.this);
+                /*RoomOP openhelper = new RoomOP(NewRoom.this);
                 db = openhelper.getWritableDatabase();
                 ContentValues cv = new ContentValues();
                 cv.put("title", name);
                 cv.put("body", restaurant);
                 cv.put("price", location);
                 cv.put("deadline", deadline);
-                db.insert(OrderDB.ROOMTABLE, null, cv);
+                db.insert(OrderDB.ROOMTABLE, null, cv);*/
 
 
                 startActivity(intent);
